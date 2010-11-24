@@ -965,7 +965,9 @@ class String
 
     last_match = nil
     match = pattern.match_from self, last_end
-
+    
+    raise RuntimeError, "string frozen" if block_given? && match && frozen?
+    
     offset = match.begin 0 if match
 
     while match
